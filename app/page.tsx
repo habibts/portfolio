@@ -1,19 +1,31 @@
-import { Button } from "@/components/ui/button"
+import { Navbar } from "@/components/navbar"
+import { Hero } from "@/components/hero"
+import { About } from "@/components/sections/about"
+import { Skills } from "@/components/sections/skills"
+import { Projects } from "@/components/sections/projects"
+import { Resume } from "@/components/sections/resume"
+import { Contact } from "@/components/sections/contact"
+import { Footer } from "@/components/footer"
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
-        </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
-        </div>
+    <main className="relative min-h-svh overflow-x-hidden pt-[var(--navbar-height)]">
+      <div
+        className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+        aria-hidden="true"
+      >
+        <div className="soft-glow-blue -top-[20rem] -left-[28rem] size-[62rem]" />
+        <div className="soft-glow-violet -right-[28rem] -bottom-[30rem] size-[68rem]" />
+        <div className="soft-glow-cyan top-[42%] left-[18%] size-[48rem] opacity-30" />
       </div>
-    </div>
+      <Navbar />
+      <Hero />
+      <About />
+      <Skills />
+      <Projects />
+      <Resume />
+      <Contact />
+      <Footer />
+    </main>
   )
 }
