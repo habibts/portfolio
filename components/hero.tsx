@@ -7,12 +7,35 @@ import {
   Check,
   Code2,
   Command,
-  GitBranch,
   Mail,
   Sparkles,
   Terminal,
   Zap,
 } from "lucide-react"
+
+import { ElementRef } from "@/components/ui/element-ref"
+
+import {
+  EMAIL_CONTACT_LINK,
+  GITHUB_PROFILE_URL,
+  LINKEDIN_PROFILE_URL,
+} from "@/data/social-links"
+
+const HERO_SOCIALS = [
+  {
+    label: "GitHub",
+    href: GITHUB_PROFILE_URL,
+    icon: "/images/github.jpg",
+    external: true,
+  },
+  { label: "Email", href: EMAIL_CONTACT_LINK, icon: Mail, external: true },
+  {
+    label: "LinkedIn",
+    href: LINKEDIN_PROFILE_URL,
+    icon: "/images/linkedin.png",
+    external: true,
+  },
+] as const
 
 const codeLines = [
   {
@@ -190,7 +213,9 @@ export function Hero() {
               className="group relative inline-flex min-h-12 items-center justify-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-500 to-violet-600 px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_35px_-12px_rgba(79,70,229,0.8)] transition-shadow hover:shadow-[0_18px_42px_-10px_rgba(79,70,229,0.95)] focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none"
             >
               <span className="absolute inset-0 translate-y-full bg-white/15 transition-transform duration-300 group-hover:translate-y-0" />
-              <Mail className="relative size-4" aria-hidden="true" />
+              <ElementRef refId="hero-get-in-touch-email-logo">
+                <Mail className="relative size-4" aria-hidden="true" />
+              </ElementRef>
               <span className="relative">Get in Touch</span>
               <ArrowUpRight
                 className="relative size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
@@ -217,37 +242,46 @@ export function Hero() {
 
           <motion.div
             {...getEntrance(reduceMotion, 0.42)}
-            className="mt-8 flex flex-wrap items-center gap-3 text-sm"
+            className="mt-6 flex items-center gap-2"
           >
-            <span className="mr-1 text-muted-foreground">
-              Let&apos;s connect
+            <span className="mr-1 text-xs font-medium text-muted-foreground">
+              Connect
             </span>
-            <motion.a
-              href="https://github.com/habib-71"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={reduceMotion ? undefined : { y: -2 }}
-              className="hero-glass group inline-flex items-center gap-2 rounded-xl px-3 py-2 text-foreground transition-colors hover:text-primary focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
-            >
-              <GitBranch className="size-4" aria-hidden="true" />
-              <span className="font-medium">GitHub</span>
-              <ArrowUpRight
-                className="size-3.5 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                aria-hidden="true"
-              />
-            </motion.a>
-            <motion.a
-              href="mailto:mdhabib18005@gmail.com"
-              whileHover={reduceMotion ? undefined : { y: -2 }}
-              className="hero-glass group inline-flex items-center gap-2 rounded-xl px-3 py-2 text-foreground transition-colors hover:text-primary focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
-            >
-              <Mail className="size-4" aria-hidden="true" />
-              <span className="font-medium">Email</span>
-              <ArrowUpRight
-                className="size-3.5 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                aria-hidden="true"
-              />
-            </motion.a>
+            {HERO_SOCIALS.map(({ label, href, icon: Icon, external }) => {
+              const isEmail = label === "Email"
+              const iconElement =
+                typeof Icon === "string" ? (
+                  <img
+                    src={Icon}
+                    alt={label}
+                    className="size-5 rounded-full object-cover"
+                    aria-hidden="true"
+                  />
+                ) : (
+                  <Icon className="size-4" aria-hidden="true" />
+                )
+              return (
+                <motion.a
+                  key={label}
+                  href={href}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noopener noreferrer" : undefined}
+                  aria-label={`${external ? "Visit" : "Email"} Habibur Rahman${external ? ` on ${label}` : ""}`}
+                  title={label}
+                  whileHover={reduceMotion ? undefined : { y: -2 }}
+                  whileTap={reduceMotion ? undefined : { scale: 0.94 }}
+                  className="hero-glass grid size-9 place-items-center rounded-xl text-muted-foreground transition-colors hover:border-primary/35 hover:text-primary focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+                >
+                  {isEmail ? (
+                    <ElementRef refId={`hero-${label.toLowerCase()}-logo`}>
+                      {iconElement}
+                    </ElementRef>
+                  ) : (
+                    iconElement
+                  )}
+                </motion.a>
+              )
+            })}
           </motion.div>
         </div>
 

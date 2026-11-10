@@ -6,14 +6,17 @@ import {
   ArrowUpRight,
   Check,
   Copy,
-  GitBranch,
   Mail,
-  UserRound,
 } from "lucide-react"
 
 import { Reveal } from "@/components/ui/reveal"
-
-const EMAIL = "mdhabib18005@gmail.com"
+import { ElementRef } from "@/components/ui/element-ref"
+import {
+  EMAIL_ADDRESS,
+  EMAIL_CONTACT_LINK,
+  GITHUB_PROFILE_URL,
+  LINKEDIN_PROFILE_URL,
+} from "@/data/social-links"
 
 export function Contact() {
   const [copied, setCopied] = useState(false)
@@ -21,7 +24,7 @@ export function Contact() {
 
   async function copyEmail() {
     try {
-      await navigator.clipboard.writeText(EMAIL)
+      await navigator.clipboard.writeText(EMAIL_ADDRESS)
       setCopied(true)
       window.setTimeout(() => setCopied(false), 2200)
     } catch {
@@ -67,7 +70,9 @@ export function Contact() {
                 aria-hidden="true"
               />
               <span className="relative grid size-12 place-items-center rounded-2xl bg-gradient-to-br from-blue-500 to-violet-600 text-white shadow-lg shadow-primary/25">
-                <Mail className="size-5" aria-hidden="true" />
+                <ElementRef refId="contact-email-logo">
+                  <Mail className="size-5" aria-hidden="true" />
+                </ElementRef>
               </span>
               <p className="relative mt-6 text-[0.68rem] font-semibold tracking-[0.18em] text-primary uppercase">
                 Email
@@ -76,19 +81,23 @@ export function Contact() {
                 Start a conversation
               </h3>
               <a
-                href={`mailto:${EMAIL}`}
+                href={EMAIL_CONTACT_LINK}
                 className="relative mt-4 w-fit text-sm font-medium break-all text-muted-foreground transition-colors hover:text-primary focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
               >
-                {EMAIL}
+                <ElementRef refId="contact-email-address">{EMAIL_ADDRESS}</ElementRef>
               </a>
               <div className="relative mt-7 flex flex-wrap items-center gap-3">
-                <a
-                  href={`mailto:${EMAIL}`}
-                  className="inline-flex min-h-10 items-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-md shadow-primary/20 transition-transform hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none"
-                >
-                  Send an email
-                  <ArrowUpRight className="size-4" aria-hidden="true" />
-                </a>
+              <a
+                href={EMAIL_CONTACT_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-10 items-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-md shadow-primary/20 transition-transform hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none"
+              >
+              <ElementRef refId="contact-send-email">
+                Send an email
+              </ElementRef>
+                <ArrowUpRight className="size-4" aria-hidden="true" />
+              </a>
                 <button
                   type="button"
                   onClick={copyEmail}
@@ -113,14 +122,19 @@ export function Contact() {
 
           <Reveal delay={0.12} className="h-full">
             <motion.a
-              href="https://github.com/habib-71"
+              href={GITHUB_PROFILE_URL}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={reduceMotion ? undefined : { y: -5 }}
               className="glass-card group flex h-full flex-col rounded-[1.75rem] p-6 transition-[border-color,box-shadow] hover:border-primary/35 hover:shadow-xl hover:shadow-primary/10 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none sm:p-7"
             >
               <span className="grid size-12 place-items-center rounded-2xl bg-foreground text-background shadow-lg shadow-slate-950/15 dark:bg-white dark:text-slate-950">
-                <GitBranch className="size-5" aria-hidden="true" />
+                <img
+                  src="/images/github.jpg"
+                  alt="GitHub"
+                  className="size-5 rounded-full object-cover"
+                  aria-hidden="true"
+                />
               </span>
               <p className="mt-6 text-[0.68rem] font-semibold tracking-[0.18em] text-muted-foreground uppercase">
                 Social
@@ -139,9 +153,20 @@ export function Contact() {
           </Reveal>
 
           <Reveal delay={0.18} className="h-full">
-            <article className="glass-card flex h-full flex-col rounded-[1.75rem] p-6 sm:p-7">
+            <motion.a
+              href={LINKEDIN_PROFILE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={reduceMotion ? undefined : { y: -5 }}
+              className="glass-card group flex h-full flex-col rounded-[1.75rem] p-6 transition-[border-color,box-shadow] hover:border-primary/35 hover:shadow-xl hover:shadow-primary/10 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none sm:p-7"
+            >
               <span className="grid size-12 place-items-center rounded-2xl bg-sky-500/10 text-sky-600 dark:text-sky-300">
-                <UserRound className="size-5" aria-hidden="true" />
+                <img
+                  src="/images/linkedin.png"
+                  alt="LinkedIn"
+                  className="size-6 rounded-full object-cover"
+                  aria-hidden="true"
+                />
               </span>
               <p className="mt-6 text-[0.68rem] font-semibold tracking-[0.18em] text-muted-foreground uppercase">
                 Social
@@ -149,10 +174,14 @@ export function Contact() {
               <h3 className="mt-2 text-xl font-semibold tracking-tight text-foreground">
                 LinkedIn
               </h3>
-              <p className="mt-auto pt-7 text-sm leading-6 text-muted-foreground">
-                Profile link coming soon.
-              </p>
-            </article>
+              <span className="mt-auto inline-flex min-h-10 items-end gap-2 pt-7 text-sm font-semibold text-primary">
+                View profile
+                <ArrowUpRight
+                  className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  aria-hidden="true"
+                />
+              </span>
+            </motion.a>
           </Reveal>
         </div>
       </div>

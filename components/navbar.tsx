@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { motion, useReducedMotion } from "motion/react"
-import { Menu, Monitor, Moon, Sun } from "lucide-react"
+import { Download, Menu, Moon, Sun } from "lucide-react"
 
 import { useTheme } from "@/components/theme-provider"
 import {
@@ -19,52 +19,27 @@ const NAV_LINKS = [
   { href: "#about", label: "About" },
   { href: "#skills", label: "Skills" },
   { href: "#projects", label: "Projects" },
-  { href: "#resume", label: "Resume" },
   { href: "#contact", label: "Contact" },
 ] as const
 
-const THEMES = [
-  { value: "light", label: "Light", Icon: Sun },
-  { value: "dark", label: "Dark", Icon: Moon },
-  { value: "system", label: "System", Icon: Monitor },
-] as const
-
-function ThemeSelector({ compact = false }: { compact?: boolean }) {
-  const { setTheme, theme } = useTheme()
+function ThemeToggle() {
+  const { resolvedTheme, setTheme } = useTheme()
+  const reduceMotion = useReducedMotion() ?? false
+  const nextTheme = resolvedTheme === "dark" ? "light" : "dark"
+  const ThemeIcon = resolvedTheme === "dark" ? Sun : Moon
 
   return (
-    <div
-      aria-label="Choose color theme"
-      className={cn(
-        "inline-flex items-center rounded-xl border border-border/80 bg-background/45 p-1 shadow-sm",
-        compact && "w-full justify-between"
-      )}
+    <motion.button
+      type="button"
+      aria-label={`Switch to ${nextTheme} theme`}
+      title={`Switch to ${nextTheme} theme`}
+      onClick={() => setTheme(nextTheme)}
+      whileHover={reduceMotion ? undefined : { y: -1, rotate: 8 }}
+      whileTap={reduceMotion ? undefined : { scale: 0.94 }}
+      className="grid size-10 place-items-center rounded-xl border border-border/80 bg-background/45 text-muted-foreground shadow-sm transition-colors hover:border-primary/30 hover:bg-primary/10 hover:text-primary focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
     >
-      {THEMES.map(({ value, label, Icon }) => {
-        const active = theme === value
-        return (
-          <button
-            key={value}
-            type="button"
-            aria-pressed={active}
-            onClick={() => setTheme(value)}
-            className={cn(
-              "inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg px-2.5 text-xs font-medium transition-all focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none",
-              compact && "flex-1",
-              active
-                ? "bg-gradient-to-br from-primary to-accent-violet text-primary-foreground shadow-md shadow-primary/25"
-                : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
-            )}
-            title={`${label} theme`}
-          >
-            <Icon className="size-3.5" aria-hidden="true" />
-            <span className={cn(!compact && "sr-only xl:not-sr-only")}>
-              {label}
-            </span>
-          </button>
-        )
-      })}
-    </div>
+      <ThemeIcon className="size-4" aria-hidden="true" />
+    </motion.button>
   )
 }
 
@@ -180,11 +155,19 @@ export function Navbar() {
             })}
           </div>
           <span className="mx-3 h-6 w-px bg-border" aria-hidden="true" />
-          <ThemeSelector />
+          <ThemeToggle />
+          <a
+            href="/Habibur_Rahman_Resume.pdf"
+            download="Habibur_Rahman_Resume.pdf"
+            className="ml-2 inline-flex min-h-10 items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-500 to-violet-600 px-3.5 text-sm font-semibold text-white shadow-md shadow-primary/25 transition-all hover:-translate-y-px hover:shadow-lg hover:shadow-primary/30 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none"
+          >
+            <Download className="size-4" aria-hidden="true" />
+            Resume
+          </a>
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
-          <ThemeSelector />
+          <ThemeToggle />
           <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
             <SheetTrigger
               className="grid size-10 place-items-center rounded-xl border border-border bg-background/50 text-foreground shadow-sm transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
@@ -223,10 +206,15 @@ export function Navbar() {
                 })}
               </div>
               <div className="mt-6 border-t border-border/70 pt-5">
-                <p className="mb-3 text-[0.68rem] font-semibold tracking-[0.16em] text-muted-foreground uppercase">
-                  Appearance
-                </p>
-                <ThemeSelector compact />
+                <a
+                  href="/Habibur_Rahman_Resume.pdf"
+                  download="Habibur_Rahman_Resume.pdf"
+                  onClick={closeMenu}
+                  className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-500 to-violet-600 px-4 text-sm font-semibold text-white shadow-md shadow-primary/25 transition-shadow hover:shadow-lg hover:shadow-primary/30 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none"
+                >
+                  <Download className="size-4" aria-hidden="true" />
+                  Download Resume
+                </a>
               </div>
             </SheetContent>
           </Sheet>

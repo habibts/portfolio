@@ -6,7 +6,6 @@ import {
   ArrowUpRight,
   Code2,
   ExternalLink,
-  GitBranch,
   type LucideIcon,
 } from "lucide-react"
 
@@ -28,7 +27,7 @@ const PLACEHOLDER_VISUALS: { Icon: LucideIcon; gradient: string }[] = [
     Icon: ExternalLink,
     gradient: "from-blue-500 via-indigo-500 to-violet-500",
   },
-  { Icon: GitBranch, gradient: "from-violet-500 via-fuchsia-500 to-cyan-400" },
+  { Icon: Code2, gradient: "from-violet-500 via-fuchsia-500 to-cyan-400" },
 ]
 
 const IMAGE_POSITIONS: Record<string, string> = {
@@ -129,7 +128,12 @@ export function ProjectCard({
                 whileTap={reduceMotion ? undefined : { scale: 0.98 }}
                 className="inline-flex min-h-9 items-center gap-1.5 rounded-lg border border-border/70 bg-background/35 px-3 text-xs font-semibold text-foreground transition-colors hover:border-primary/30 hover:bg-primary/10 hover:text-primary focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
               >
-                <GitBranch className="size-3.5" aria-hidden="true" />
+                <img
+                  src="/images/github.jpg"
+                  alt="GitHub"
+                  className="size-4 rounded-full object-cover"
+                  aria-hidden="true"
+                />
                 GitHub
               </motion.a>
             )}

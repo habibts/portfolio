@@ -76,7 +76,7 @@ function ThemeHotkey() {
 
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
+  defaultTheme = "dark",
 }: {
   children?: React.ReactNode
   defaultTheme?: Theme
@@ -85,7 +85,7 @@ export function ThemeProvider({
   // applies the saved color class before paint, then this effect reconciles state.
   const [theme, setThemeState] = React.useState<Theme>(defaultTheme)
   const [resolvedTheme, setResolvedTheme] = React.useState<"light" | "dark">(
-    "light"
+    defaultTheme === "light" ? "light" : "dark"
   )
 
   React.useEffect(() => {
