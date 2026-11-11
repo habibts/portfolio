@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useReducedMotion } from "motion/react"
-import { ArrowUpRight, Download, FileText, Sparkles } from "lucide-react"
+import { Download, FileText, Sparkles } from "lucide-react"
 
 import { Reveal } from "@/components/ui/reveal"
 
@@ -59,19 +59,14 @@ export function Resume() {
             </div>
 
             <motion.a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/Habibur_Rahman_Resume.pdf"
+              download="Habibur_Rahman_Resume.pdf"
               whileHover={reduceMotion ? undefined : { y: -3, scale: 1.015 }}
               whileTap={reduceMotion ? undefined : { scale: 0.98 }}
               className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-500 to-violet-600 px-5 py-3 text-sm font-semibold text-white shadow-[0_16px_38px_-15px_rgb(79_70_229/0.85)] transition-shadow hover:shadow-[0_20px_44px_-12px_rgb(79_70_229/0.95)] focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none"
             >
               <Download className="size-4" aria-hidden="true" />
               Download CV
-              <ArrowUpRight
-                className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                aria-hidden="true"
-              />
             </motion.a>
           </div>
         </div>

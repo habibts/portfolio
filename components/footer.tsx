@@ -3,8 +3,6 @@
 import { motion, useReducedMotion } from "motion/react"
 import { Mail } from "lucide-react"
 
-import { ElementRef } from "@/components/ui/element-ref"
-
 import {
   EMAIL_CONTACT_LINK,
   GITHUB_PROFILE_URL,
@@ -18,7 +16,7 @@ const SOCIAL_LINKS = [
     icon: "/images/github.jpg",
     external: true,
   },
-  { label: "Email", href: EMAIL_CONTACT_LINK, icon: Mail, external: true },
+  { label: "Email", href: EMAIL_CONTACT_LINK, icon: Mail, external: false },
   {
     label: "LinkedIn",
     href: LINKEDIN_PROFILE_URL,
@@ -76,9 +74,7 @@ export function Footer() {
     aria-hidden="true"
   />
 ) : (
-  <ElementRef refId="footer-email-logo">
-    <Icon className="size-4" aria-hidden="true" />
-  </ElementRef>
+  <Icon className="size-4" aria-hidden="true" />
 )}
             </motion.a>
           ))}

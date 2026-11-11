@@ -13,8 +13,6 @@ import {
   Zap,
 } from "lucide-react"
 
-import { ElementRef } from "@/components/ui/element-ref"
-
 import {
   EMAIL_CONTACT_LINK,
   GITHUB_PROFILE_URL,
@@ -28,7 +26,7 @@ const HERO_SOCIALS = [
     icon: "/images/github.jpg",
     external: true,
   },
-  { label: "Email", href: EMAIL_CONTACT_LINK, icon: Mail, external: true },
+  { label: "Email", href: EMAIL_CONTACT_LINK, icon: Mail, external: false },
   {
     label: "LinkedIn",
     href: LINKEDIN_PROFILE_URL,
@@ -213,9 +211,7 @@ export function Hero() {
               className="group relative inline-flex min-h-12 items-center justify-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-500 to-violet-600 px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_35px_-12px_rgba(79,70,229,0.8)] transition-shadow hover:shadow-[0_18px_42px_-10px_rgba(79,70,229,0.95)] focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none"
             >
               <span className="absolute inset-0 translate-y-full bg-white/15 transition-transform duration-300 group-hover:translate-y-0" />
-              <ElementRef refId="hero-get-in-touch-email-logo">
-                <Mail className="relative size-4" aria-hidden="true" />
-              </ElementRef>
+              <Mail className="relative size-4" aria-hidden="true" />
               <span className="relative">Get in Touch</span>
               <ArrowUpRight
                 className="relative size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
@@ -248,7 +244,6 @@ export function Hero() {
               Connect
             </span>
             {HERO_SOCIALS.map(({ label, href, icon: Icon, external }) => {
-              const isEmail = label === "Email"
               const iconElement =
                 typeof Icon === "string" ? (
                   <img
@@ -272,13 +267,7 @@ export function Hero() {
                   whileTap={reduceMotion ? undefined : { scale: 0.94 }}
                   className="hero-glass grid size-9 place-items-center rounded-xl text-muted-foreground transition-colors hover:border-primary/35 hover:text-primary focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
                 >
-                  {isEmail ? (
-                    <ElementRef refId={`hero-${label.toLowerCase()}-logo`}>
-                      {iconElement}
-                    </ElementRef>
-                  ) : (
-                    iconElement
-                  )}
+                  {iconElement}
                 </motion.a>
               )
             })}

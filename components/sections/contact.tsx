@@ -10,7 +10,6 @@ import {
 } from "lucide-react"
 
 import { Reveal } from "@/components/ui/reveal"
-import { ElementRef } from "@/components/ui/element-ref"
 import {
   EMAIL_ADDRESS,
   EMAIL_CONTACT_LINK,
@@ -70,9 +69,9 @@ export function Contact() {
                 aria-hidden="true"
               />
               <span className="relative grid size-12 place-items-center rounded-2xl bg-gradient-to-br from-blue-500 to-violet-600 text-white shadow-lg shadow-primary/25">
-                <ElementRef refId="contact-email-logo">
+                <a href={EMAIL_CONTACT_LINK} className="block">
                   <Mail className="size-5" aria-hidden="true" />
-                </ElementRef>
+                </a>
               </span>
               <p className="relative mt-6 text-[0.68rem] font-semibold tracking-[0.18em] text-primary uppercase">
                 Email
@@ -84,18 +83,14 @@ export function Contact() {
                 href={EMAIL_CONTACT_LINK}
                 className="relative mt-4 w-fit text-sm font-medium break-all text-muted-foreground transition-colors hover:text-primary focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
               >
-                <ElementRef refId="contact-email-address">{EMAIL_ADDRESS}</ElementRef>
+                {EMAIL_ADDRESS}
               </a>
               <div className="relative mt-7 flex flex-wrap items-center gap-3">
               <a
                 href={EMAIL_CONTACT_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="inline-flex min-h-10 items-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-md shadow-primary/20 transition-transform hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none"
               >
-              <ElementRef refId="contact-send-email">
                 Send an email
-              </ElementRef>
                 <ArrowUpRight className="size-4" aria-hidden="true" />
               </a>
                 <button
