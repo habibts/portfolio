@@ -26,7 +26,7 @@ export const PROJECTS: Project[] = [
     description:
       "A creative studio booking platform that helps users discover and book inspiring spaces for their projects through a simple and convenient booking experience.",
     technologies: ["React", "Next.js", "TypeScript", "Node.js", "Express.js", "MongoDB"],
-    live: "https://salon-book-client-wine.vercel.app/",
+    live: "https://studio-space-client-steel.vercel.app/",
     github: "https://github.com/habibts/studio-space-client",
     image: "/images/projects/studiospace.png",
   },
