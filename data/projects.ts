@@ -9,18 +9,29 @@ export type Project = {
 }
 
 export const PROJECTS: Project[] = [
-  {
+
+   {
     id: 1,
+    name: "Salon Book",
+    description:
+      "SalonBook is a salon appointment booking platform where customers can explore salon services, book appointments, and manage their bookings. Administrators can manage services, customers, appointments, and payment information through an admin dashboard.",
+    technologies: ["React", "Next.js", "TypeScript", "Node.js", "Express.js", "MongoDB"],
+    live: "https://salon-book-client-wine.vercel.app/",
+    github: "https://github.com/habibts/salonBook-client",
+    image: "/images/projects/salonBook.png",
+  },
+  {
+    id: 2,
     name: "StudioSpace",
     description:
       "A creative studio booking platform that helps users discover and book inspiring spaces for their projects through a simple and convenient booking experience.",
     technologies: ["React", "Next.js", "TypeScript", "Node.js", "Express.js", "MongoDB"],
-    live: "https://studio-space-client-steel.vercel.app/",
+    live: "https://salon-book-client-wine.vercel.app/",
     github: "https://github.com/habibts/studio-space-client",
     image: "/images/projects/studiospace.png",
   },
   {
-  id: 2,
+  id: 3,
   name: "Bazar Dor",
   description:
     "A Bangla market price tracking platform that helps users explore daily essential product prices, compare market rates, and monitor price changes to make smarter shopping decisions.",
@@ -36,7 +47,7 @@ export const PROJECTS: Project[] = [
   image: "/images/projects/bazar-dor.png",
 },
   {
-  id: 3,
+  id: 4,
   name: "Dev Stack",
   description:
     "A developer-focused platform featuring various web development technologies through informative and interactive technology cards.",
